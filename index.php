@@ -2,34 +2,26 @@
     require_once 'connection.php';
 ?>
 <?php
-    $login = isset($_POST['login']);
-
-    $user_id = 0;
-    $itIsSet = false;
-
-    if($login){
-        $email = $_POST['mail'];
-        $pswd = $_POST['pswd'];
-
-        $sql1 = "SELECT * FROM users";
-        $result = mysqli_query($connection,$sql1);
-
-        while($row=mysqli_fetch_assoc($result)){
-            if($email == $row['mail'] && $pswd == $row['pswd']){
-                $user_id = $row['userid'];
-                $itIsSet = true;
-                //$date = "20" . date("ymd");
-                //$sql2 = "UPDATE users SET lastlogin='{$date}' where userid ={$user_id} ";
-                //$result2 = mysqli_query($connection,$sql2);
-                header("Location: users.php");
-            }
-        }
-    }
-
     session_start();
 
-    if($itIsSet == true){
-        $_SESSION['user_id'] = $user_id;
+    if(isset($_POST['login'])){
+        $email = mysqli_real_escape_string($connection,$_POST['mail']);
+        $pswd = mysqli_real_escape_string($connection,$_POST['pswd']);
+
+        $sql1 = "SELECT * FROM users WHERE mail='{$email}' AND pswd='{$pswd}' ";
+        $result = mysqli_query($connection,$sql1);
+
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['user_id'] = $row['userid'];
+
+            $sql3 = "UPDATE users SET onoroff=0 WHERE userid = '{$_SESSION['user_id']}' LIMIT 1";
+            $result3 = mysqli_query($connection,$sql3);
+
+            header("Location: users.php");
+        }else{
+            echo "Invalid PSWD or MAIL";
+        }
     }
 ?>
 <!DOCTYPE html>
