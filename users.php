@@ -10,11 +10,11 @@
 
     $fname = '';
 
-    $sql11 = "SELECT firstname FROM users WHERE userid={$_SESSION['user_id']}";
+    $sql11 = "SELECT fname FROM users WHERE userid={$_SESSION['user_id']}";
     $result11 = mysqli_query($connection,$sql11);
 
     while($row = mysqli_fetch_assoc($result11)){
-        $fname = $row['firstname'];
+        $fname = $row['fname'];
     }
 ?>
 <!DOCTYPE html>
@@ -59,7 +59,7 @@
                 $i = 0;
                 while($datarows = $result_set->fetch_array(MYSQLI_ASSOC)){
                     $i++;
-                    echo "<tr>" . "<td>" . $i . "</td>" . "<td>" . $datarows['firstname'] . "</td>" . "<td>" . $datarows['lastname'] . "</td>" . "<td>" . $datarows['mail'] . "</td>" . "<td>" . "<button type='button' class='btn btn-primary'><a href=\"modify_user.php?user_id={$datarows['userid']}\" class='editbtn'>Edit</a></button>" . "</td>" ."<td>". "<button type='button' class='btn btn-danger'><a href=\"delete.php?user_id={$datarows['userid']}\" class='editbtn'>Delete</a></button>" . "</td>" ."</tr>";
+                    echo "<tr>" . "<td>" . $i . "</td>" . "<td>" . $datarows['fname'] . "</td>" . "<td>" . $datarows['lname'] . "</td>" . "<td>" . $datarows['mail'] . "</td>" . "<td>" . "<button type='button' class='btn btn-primary'><a href=\"modify_user.php?user_id={$datarows['userid']}\" class='editbtn'>Edit</a></button>" . "</td>" ."<td>". "<button type='button' class='btn btn-danger'><a href=\"delete.php?user_id={$datarows['userid']}\" class='editbtn'>Delete</a></button>" . "</td>" ."</tr>";
                 }
             }
         ?>

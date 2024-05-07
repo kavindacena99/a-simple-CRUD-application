@@ -15,8 +15,8 @@
             $row = mysqli_fetch_assoc($result);
             $_SESSION['user_id'] = $row['userid'];
 
-            $sql3 = "UPDATE users SET onoroff=0 WHERE userid = '{$_SESSION['user_id']}' LIMIT 1";
-            $result3 = mysqli_query($connection,$sql3);
+            //$sql3 = "UPDATE users SET onoroff=0 WHERE userid = '{$_SESSION['user_id']}' LIMIT 1";
+            //$result3 = mysqli_query($connection,$sql3);
 
             header("Location: users.php");
         }else{

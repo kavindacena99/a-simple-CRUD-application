@@ -20,7 +20,7 @@
         $cpswd = $_POST['cpswd'];
         
         if($pswd == $cpswd){
-            $sql10 = "INSERT INTO users (firstname,lastname,mail,pswd) VALUES('{$fname}','{$lname}','{$mail}','{$pswd}')";
+            $sql10 = "INSERT INTO users (fname,lname,mail,pswd) VALUES('{$fname}','{$lname}','{$mail}','{$pswd}')";
             $result = mysqli_query($connection,$sql10);    
 
             if(isset($result)){
